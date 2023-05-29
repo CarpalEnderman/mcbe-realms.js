@@ -1,5 +1,9 @@
 # mcbe-realms
 
-package to help interacting with the mcbe realms api.
+A JS wrapper for the MCBE realms API.
 
-theres no guarantee that this works, ive tested like probably 15% of the shit ive actually implemented so good luck if ur using this i guess
+Everything is decently documented so you can look around and do whatever you want with it.
+
+**NOTE:** This is weakly tested, so there's no guarantees that _everything_ is working, however I will have tested the majority of stuff.
+
+[npm](https://www.npmjs.com/package/mcbe-realms) - [github](https://github.com/CarpalEnderman/mcbe-realms.js)
