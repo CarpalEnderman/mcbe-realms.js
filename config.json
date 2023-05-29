@@ -1,0 +1,7 @@
+{
+  "REALMS_API": "https://pocket.realms.minecraft.net",
+  "MC_VERSION": "1.19.70",
+  "USER_AGENT": "MCPE/UWP",
+
+  "TEMP_FILE_DOWNLOAD_FOLDER": "temp"
+}
