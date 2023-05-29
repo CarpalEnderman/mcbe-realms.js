@@ -1,6 +1,6 @@
 const Backup = require("./backup");
 const Download = require("./download");
-const { RealmApiError, RealmApiErrorCode } = require("../errors/realmAPIError");
+const { RealmApiError, RealmApiErrorName } = require("../errors/realmAPIError");
 
 /**
  * A class that is used to interact with the realm/server portion
@@ -48,7 +48,7 @@ module.exports = class Realm {
         if (err?.response?.status == 403) {
           throw new RealmApiError(
             "The user who fetched this realm is not the owner.",
-            RealmApiErrorCode.NotRealmOwner,
+            RealmApiErrorName.NotRealmOwner,
             err
           );
         } else {

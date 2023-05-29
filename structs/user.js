@@ -1,6 +1,6 @@
 const axios = require("axios").default;
 const Realm = require("./realm");
-const { RealmApiError, RealmApiErrorCode } = require("../errors/realmAPIError");
+const { RealmApiError, RealmApiErrorName } = require("../errors/realmAPIError");
 
 const { REALMS_API, MC_VERSION, USER_AGENT } = require("../config.json");
 
@@ -22,14 +22,14 @@ function handleRealmIdError(realmId) {
       case 403:
         throw new RealmApiError(
           `User does not have access to the realm with id '${realmId}'.`,
-          RealmApiErrorCode.CannotAccessRealm,
+          RealmApiErrorName.CannotAccessRealm,
           apiError
         );
 
       case 404:
         throw new RealmApiError(
           `The realm id '${realmId}' is invalid.`,
-          RealmApiErrorCode.InvalidRealmId,
+          RealmApiErrorName.InvalidRealmId,
           apiError
         );
 
@@ -46,7 +46,7 @@ function handleInviteCodeError(realmInviteCode) {
       case 404:
         throw new RealmApiError(
           `The realm invite code '${realmInviteCode}' is invalid.`,
-          RealmApiErrorCode.InvalidInvite,
+          RealmApiErrorName.InvalidInvite,
           apiError
         );
 

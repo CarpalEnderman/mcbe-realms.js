@@ -6,7 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CarpalEnderman/mcbe-realms.js.git"
+  },
+  "keywords": [
+    "bedrock",
+    "mcbe",
+    "minecraft",
+    "realms"
+  ],
+  "author": "CarpalEnderman",
   "license": "ISC",
   "dependencies": {
     "@xboxreplay/xboxlive-auth": "^4.0.0",
