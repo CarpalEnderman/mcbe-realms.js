@@ -1,5 +1,6 @@
 const Download = require("./download");
 
+/** A class which handles worlds backups. */
 module.exports = class Backup {
   #api;
   #realm;

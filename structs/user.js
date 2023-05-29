@@ -193,7 +193,7 @@ module.exports = class User {
 
   /**
    * Updates a realm's configuration.
-   * @param {Promise<string>} realmId
+   * @param {string} realmId
    */
   async updateRealmConfig(realmId, newRealmSettings) {
     return this.#api
