@@ -86,6 +86,7 @@ module.exports = class Realm {
   /**
    * Gets the backup with the specified id.
    * @param {string | null} backupId Returns the latest backup if omitted.
+   * @returns {Promise<Backup>}
    */
   async getBackup(backupId) {
     return this.getBackups().then((backups) =>

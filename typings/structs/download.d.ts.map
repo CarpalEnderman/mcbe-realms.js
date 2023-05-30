@@ -1,1 +1,1 @@
-{"version":3,"file":"download.d.ts","sourceRoot":"","sources":["../../structs/download.js"],"names":[],"mappings":";AA8CiB;IACf,uBAMC;IAED;;;;OAIG;IACH;oBAHyB,MAAM;qBAAe,MAAM;QACvC,QAAQ,MAAM,CAAC,CAmB3B;IAED;;;;OAIG;IACH;oBAHyB,MAAM;mBAAa,MAAM;QACrC,QAAQ,MAAM,CAAC,CAc3B;CACF"}
+{"version":3,"file":"download.d.ts","sourceRoot":"","sources":["../../structs/download.js"],"names":[],"mappings":";AAoDiB;IACf,uBAMC;IAED;;;;OAIG;IACH;oBAHyB,MAAM;qBAAe,MAAM;4BAAsB,OAAO;QACpE,QAAQ,MAAM,CAAC,CAsC3B;IAED;;;;OAIG;IACH;oBAHyB,MAAM;mBAAa,MAAM;4BAAsB,OAAO;QAClE,QAAQ,MAAM,CAAC,CAgC3B;CACF"}

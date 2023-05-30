@@ -1,6 +1,6 @@
 export class RealmApiError extends Error {
     constructor(message: any, name: any, axiosError: any);
-    name: any;
+    errorName: any;
     apiResponse: {
         status: any;
         statusText: any;
@@ -17,5 +17,7 @@ export namespace RealmApiErrorName {
     const InvalidRealmId: string;
     const InvalidInvite: string;
     const NotRealmOwner: string;
+    const RouteUnavailable: string;
+    const RateLimited: string;
 }
 //# sourceMappingURL=realmApiError.d.ts.map

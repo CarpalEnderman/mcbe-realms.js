@@ -14,8 +14,9 @@ declare class Realm {
     /**
      * Gets the backup with the specified id.
      * @param {string | null} backupId Returns the latest backup if omitted.
+     * @returns {Promise<Backup>}
      */
-    getBackup(backupId: string | null): Promise<any>;
+    getBackup(backupId: string | null): Promise<Backup>;
     /**
      * Gets an array of all available backups.
      * @returns {Backup[]}

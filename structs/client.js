@@ -74,6 +74,31 @@ module.exports = class Client {
   constructor(authToken) {
     const reqConfig = createRealmRequestConfig(authToken);
     this.#api = axios.create(reqConfig);
+
+    this.#api.interceptors.response.use(
+      (response) => response,
+      (err) => {
+        let retryAfter = err?.response?.headers?.["retry-after"];
+        switch (err?.response?.status) {
+          case 503:
+            throw new RealmApiError(
+              `This api route is currently unavailable. You have been recommended to try again in ${retryAfter} seconds.`,
+              RealmApiErrorName.RouteUnavailable,
+              err
+            );
+
+          case 429:
+            throw new RealmApiError(
+              `You have sent too many requests. You have been rate limited for ${retryAfter} seconds`,
+              RealmApiErrorName.RateLimited,
+              err
+            );
+
+          default:
+            throw err;
+        }
+      }
+    );
   }
 
   #newRealm(data) {

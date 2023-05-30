@@ -24,7 +24,10 @@ module.exports = class Backup {
     });
   }
 
-  /** Gets the download for this backup. */
+  /**
+   * Gets the download for this backup.
+   * @returns {Promise<Download>}
+   */
   async getDownload() {
     return this.#api
       .get(`/archive/download/world/${this.#realm.id}/1/${this.id}`)
@@ -33,6 +36,6 @@ module.exports = class Backup {
 
   /** Restores the realm to this backup. */
   async restore() {
-    this.#realm.restore(this.id);
+    return this.#realm.restore(this.id);
   }
 };

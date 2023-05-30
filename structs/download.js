@@ -4,9 +4,15 @@ const decompress = require("decompress");
 const path = require("path");
 const fs = require("fs");
 
+const { DownloadError, DownloadErrorName } = require("../errors/downloadError");
+
 const { TEMP_FILE_DOWNLOAD_FOLDER } = require("../config.json");
 const DEFAULT_FILE_DOWNLOAD_PATH = require("downloads-folder")();
 const TEMP_FILE_DOWNLOAD_PATH = path.join(__dirname, TEMP_FILE_DOWNLOAD_FOLDER);
+
+// Create temp path if it doesnt exist
+if (!fs.existsSync(TEMP_FILE_DOWNLOAD_PATH))
+  fs.mkdirSync(TEMP_FILE_DOWNLOAD_PATH);
 
 /** Generates a random filename. */
 function newid() {
@@ -55,18 +61,37 @@ module.exports = class Download {
 
   /**
    * Downloads the backup as the decompressed world folder.
-   * @param {{ directory?: string, foldername?: string }} options
+   * @param {{ directory?: string, foldername?: string, overwriteExisting?: boolean }} options
    * @returns {Promise<string>} The path to the downloaded folder.
    */
   async getWorldFolder(options) {
     const foldername = options?.foldername ?? `download-${newid()}`;
     const dir = options?.directory ?? DEFAULT_FILE_DOWNLOAD_PATH;
     const folderpath = path.join(dir, foldername);
+    const overwriteExisting = options?.overwriteExisting ?? false;
+
+    if (fs.existsSync(folderpath)) {
+      if (overwriteExisting) {
+        try {
+          fs.rmSync(folderpath, { recursive: true, force: true });
+        } catch (err) {
+          return Promise.reject(err);
+        }
+      } else {
+        return Promise.reject(
+          new DownloadError(
+            `A folder already exists with the name '${foldername}' in ${dir}`,
+            DownloadErrorName.FileExists
+          )
+        );
+      }
+    }
 
     try {
       const tempfilepath = await this.getRaw({
         filename: `temp-${foldername}`,
         directory: TEMP_FILE_DOWNLOAD_PATH,
+        overwriteExisting: true,
       });
       await decompress(tempfilepath, folderpath);
       fs.unlinkSync(tempfilepath);
@@ -79,13 +104,31 @@ module.exports = class Download {
 
   /**
    * Downloads the backup as the raw, compressed, .mcworld file.
-   * @param {{ directory?: string, filename?: string }} options
+   * @param {{ directory?: string, filename?: string, overwriteExisting?: boolean }} options
    * @returns {Promise<string>} The path to the downloaded file.
    */
   async getRaw(options) {
     const filename = `${options?.filename ?? `download-${newid()}`}.mcworld`;
     const dir = options?.directory ?? DEFAULT_FILE_DOWNLOAD_PATH;
     const filepath = path.join(dir, filename);
+    const overwriteExisting = options?.overwriteExisting ?? false;
+
+    if (fs.existsSync(filepath)) {
+      if (overwriteExisting) {
+        try {
+          fs.unlinkSync(filepath);
+        } catch (err) {
+          return Promise.reject(err);
+        }
+      } else {
+        return Promise.reject(
+          new DownloadError(
+            `A file already exists with the name '${filename}' in ${dir}`,
+            DownloadErrorName.FileExists
+          )
+        );
+      }
+    }
 
     const reqConfig = {
       responseType: "stream",
