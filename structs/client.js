@@ -1,6 +1,6 @@
 const axios = require("axios").default;
 const Realm = require("./realm");
-const { RealmApiError, RealmApiErrorName } = require("../errors/realmAPIError");
+const { RealmApiError, RealmApiErrorName } = require("../errors/realmApiError");
 
 const { REALMS_API, MC_VERSION, USER_AGENT } = require("../config.json");
 
@@ -59,7 +59,7 @@ function handleInviteCodeError(realmInviteCode) {
 /**
  * A class that is used to interact with the MCBE Realm API.
  */
-module.exports = class User {
+module.exports = class Client {
   /** The axios instance to create MCBE Realm API requests with. */
   #api;
 
@@ -82,7 +82,7 @@ module.exports = class User {
 
   /**
    * Gets information about the realm.
-   * @param {string} realmId
+   * @param {string | number} realmId
    * @returns {Promise<Realm>}
    */
   async getRealmFromId(realmId) {

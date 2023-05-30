@@ -11,7 +11,11 @@ class RealmApiError extends Error {
   }
 }
 
-/** An object containg all the realm api error codes. */
+/**
+ * An object containg all the realm api error codes.
+ * @readonly
+ * @enum {string}
+ */
 const RealmApiErrorName = {
   CannotAccessRealm: "CANNOT_ACCESS_REALM",
   InvalidRealmId: "INVALID_REALM_ID",

@@ -1,6 +1,6 @@
 {
   "name": "mcbe-realms",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A JS wrapper for the MCBE realms API.",
   "main": "index.js",
   "scripts": {
@@ -23,5 +23,8 @@
     "axios": "^1.4.0",
     "decompress": "^4.2.1",
     "downloads-folder": "^3.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
   }
 }

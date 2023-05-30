@@ -1,6 +1,6 @@
 const Backup = require("./backup");
 const Download = require("./download");
-const { RealmApiError, RealmApiErrorName } = require("../errors/realmAPIError");
+const { RealmApiError, RealmApiErrorName } = require("../errors/realmApiError");
 
 /**
  * A class that is used to interact with the realm/server portion

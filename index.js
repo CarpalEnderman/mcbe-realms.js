@@ -1,5 +1,8 @@
+/** @module mcbe-realms */
+
 const { authenticate } = require("@xboxreplay/xboxlive-auth");
-const User = require("./structs/user");
+const Client = require("./structs/client");
+const { RealmApiErrorName } = require("./errors/realmApiError");
 const { REALMS_API } = require("./config.json");
 
 /**
@@ -7,7 +10,7 @@ const { REALMS_API } = require("./config.json");
  * from the user's email and password.
  * @param {string} xboxEmail
  * @param {string} xboxPassword
- * @returns {Promise<User>} The User instance.
+ * @returns {Promise<Client>} The User instance.
  */
 async function login(xboxEmail, xboxPassword) {
   return authenticate(xboxEmail, xboxPassword, {
@@ -19,7 +22,7 @@ async function login(xboxEmail, xboxPassword) {
  * Creates an instance that can be used to interact with the MCBE Realms API
  * from the user's xsts token.
  * @param {string} xsts
- * @returns {User} The User instance.
+ * @returns {Client} The User instance.
  */
 function fromXSTS(xsts) {
   return fromXBL(`XBL3.0 x=${xsts.user_hash};${xsts.xsts_token}`);
@@ -29,17 +32,15 @@ function fromXSTS(xsts) {
  * Creates an instance that can be used to interact with the MCBE Realms API
  * from the user's XBL3.0 token.
  * @param {string} xblToken
- * @returns {User} The User instance.
+ * @returns {Client} The User instance.
  */
 function fromXBL(xblToken) {
-  return new User(xblToken);
+  return new Client(xblToken);
 }
-
-const { RealmApiErrorCode } = require("./errors/realmAPIError");
 
 module.exports = {
   login,
   fromXSTS,
   fromXBL,
-  RealmApiErrorCode,
+  RealmApiErrorName,
 };
